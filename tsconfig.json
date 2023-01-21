@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES2018",
+		"moduleResolution": "Node",
+		"sourceMap": true,
+		"rootDir": "src",
+		"declaration": true,
+		"strict": true
+	},
+	"include": ["src"]
+}
