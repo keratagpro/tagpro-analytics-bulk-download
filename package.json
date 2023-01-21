@@ -1,6 +1,6 @@
 {
   "name": "@keratagpro/tagpro-analytics-bulk-download",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Downloads matches in bulk from tagpro.eu. Converts the results to jsonlines and compresses them with gzip by default.",
   "author": "Kera",
   "main": "dist/index.js",
@@ -14,8 +14,8 @@
     "watch": "tsup --watch",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix && prettier --write .",
-    "prepare" : "npm run build",
-    "prepublishOnly" : "npm run lint",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
     "preversion": "npm run lint && changelog-updater --check",
     "version": "changelog-updater && git add CHANGELOG.md",
     "postversion": "git push && git push --tags"
