@@ -90,24 +90,17 @@ Reads in an uncompressed JSONLines file and returns an array of the parsed JSON 
 
 ## Note about JSONlines
 
-tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert this object to separate JSON lines, where each object has an additional `matchId` key.
+tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert the object to separate JSON lines, where each object has an additional `matchId` key.
 
-For example, this JSON export from tagpro.eu:
+For example, this JSON export of matches from tagpro.eu:
 
 ```json
-{
-	"10001": {
-		/* match data */
-	},
-	"10002": {
-		/* match data */
-	}
-}
+{"10001":{/../},"10002":{/../}}
 ```
 
 would be converted to JSONlines like this:
 
 ```json
-{ "matchId": 10001, /* match data */ }
-{ "matchId": 10002, /* match data */ }
+{/../,"matchId": 10001}
+{/../,"matchId": 10002}
 ```

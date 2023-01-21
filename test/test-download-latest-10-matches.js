@@ -1,15 +1,18 @@
-import createDebug from 'debug';
+const debug = require('debug')('bulk-download:test');
 
-import { downloadMatchRange, getLastMatchId } from '../lib/index.js';
+const { downloadMatchRange, getLastMatchId } = require('../dist');
 
-const debug = createDebug('bulk-download:test');
 debug.enabled = true;
 
-const TO_ID = await getLastMatchId();
-const FROM_ID = TO_ID - 9;
+async function downloadLatest(count) {
+	const TO_ID = await getLastMatchId();
+	const FROM_ID = TO_ID - (count - 1);
 
-try {
-	await downloadMatchRange(FROM_ID, TO_ID, `matches-${FROM_ID}-${TO_ID}.jsonl.gz`);
-} catch (ex) {
-	debug('Error downloading matches', ex?.message);
+	try {
+		await downloadMatchRange(FROM_ID, TO_ID, `matches-${FROM_ID}-${TO_ID}.jsonl.gz`);
+	} catch (ex) {
+		debug('Error downloading matches', ex?.message);
+	}
 }
+
+downloadLatest(10);

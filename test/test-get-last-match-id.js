@@ -1,3 +1,3 @@
-import { getLastMatchId } from '../lib/index.js';
+const { getLastMatchId } = require('../dist');
 
-console.log(await getLastMatchId());
+getLastMatchId().then((id) => console.log(id));
