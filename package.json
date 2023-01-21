@@ -5,6 +5,7 @@
   "author": "Kera",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "homepage": "https://github.com/keratagpro/tagpro-analytics-bulk-download",
   "repository": {
     "type": "git",
     "url": "git://github.com/keratagpro/tagpro-analytics-bulk-download.git"
