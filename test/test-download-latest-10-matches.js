@@ -1,4 +1,4 @@
-const debug = require('debug')('bulk-download:test');
+const debug = require('debug')('bulk-downloader:test');
 
 const { downloadMatchRange, getLastMatchId } = require('../dist');
 

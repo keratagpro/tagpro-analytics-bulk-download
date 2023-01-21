@@ -1,14 +1,14 @@
 {
-  "name": "@keratagpro/tagpro-analytics-bulk-download",
+  "name": "@keratagpro/tagpro-analytics-bulk-downloader",
   "version": "0.1.1",
   "description": "Downloads matches in bulk from tagpro.eu. Converts the results to jsonlines and compresses them with gzip by default.",
   "author": "Kera",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "homepage": "https://github.com/keratagpro/tagpro-analytics-bulk-download",
+  "homepage": "https://github.com/keratagpro/tagpro-analytics-bulk-downloader",
   "repository": {
     "type": "git",
-    "url": "git://github.com/keratagpro/tagpro-analytics-bulk-download.git"
+    "url": "git://github.com/keratagpro/tagpro-analytics-bulk-downloader.git"
   },
   "scripts": {
     "build": "tsup",

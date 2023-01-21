@@ -1,11 +1,11 @@
-# @keratagpro/tagpro-analytics-bulk-download
+# Tagpro Analytics bulk downloader
 
 Downloads matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Converts the results to [JSONlines](https://jsonlines.org/) and compresses them with gzip by default.
 
 ## Install
 
 ```bash
-npm install @keratagpro/tagpro-analytics-bulk-download
+npm install @keratagpro/tagpro-analytics-bulk-downloader
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ Download all maps as JSON from tagpro.eu.
 Example:
 
 ```ts
-import { downloadMaps } from '@keratagpro/tagpro-analytics-bulk-download';
+import { downloadMaps } from '@keratagpro/tagpro-analytics-bulk-downloader';
 
 await downloadMaps('bulkmaps.json');
 ```
@@ -42,7 +42,7 @@ Downloads a range of matches to a file. Default is to convert to [JSONLines](htt
 Example:
 
 ```ts
-import { downloadMatchRange, getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-download';
+import { downloadMatchRange, getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-downloader';
 
 // Download latest 10 matches
 const lastId = await getLastMatchId();
@@ -67,7 +67,7 @@ Returns the latest match ID from tagpro.eu.
 Example:
 
 ```ts
-import { getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-download';
+import { getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-downloader';
 
 const lastMatchId = await getLastMatchId();
 ```
