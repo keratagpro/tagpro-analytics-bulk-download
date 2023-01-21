@@ -1,6 +1,6 @@
 # @keratagpro/tagpro-analytics-bulk-download
 
-Downloads matches in bulk from tagpro.eu. Converts the results to [jsonlines](https://jsonlines.org/) and compresses them with gzip by default.
+Downloads matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Converts the results to [JSONlines](https://jsonlines.org/) and compresses them with gzip by default.
 
 ## Install
 
@@ -8,7 +8,7 @@ Downloads matches in bulk from tagpro.eu. Converts the results to [jsonlines](ht
 npm install @keratagpro/tagpro-analytics-bulk-download
 ```
 
-## API
+## Usage
 
 ### Download maps
 
@@ -16,7 +16,7 @@ npm install @keratagpro/tagpro-analytics-bulk-download
 downloadMaps(filename: string): Promise<void>
 ```
 
-Download maps as JSON from tagpro.eu.
+Download all maps as JSON from tagpro.eu.
 
 Example:
 
@@ -24,20 +24,6 @@ Example:
 import { downloadMaps } from '@keratagpro/tagpro-analytics-bulk-download';
 
 await downloadMaps('bulkmaps.json');
-```
-
-### Get last match ID
-
-```ts
-getLastMatchId(): Promise<number>
-```
-
-Example:
-
-```ts
-import { getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-download';
-
-const lastMatchId = await getLastMatchId();
 ```
 
 ### Download matches
@@ -70,13 +56,29 @@ try {
 }
 ```
 
+### Get last match ID
+
+```ts
+getLastMatchId(): Promise<number>
+```
+
+Returns the latest match ID from tagpro.eu.
+
+Example:
+
+```ts
+import { getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-download';
+
+const lastMatchId = await getLastMatchId();
+```
+
 ### (Advanced usage) Create a NodeJS.WritableStream of matches from tagpro.eu
 
 ```ts
 createMatchRangeStream(fromId: number, toId: number, { jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
 ```
 
-Returns a NodeJS.ReadableStream with matches from tagpro.eu. By default, the matches are converted to separate jsonlines rows and the stream is compressed with gzip.
+Returns a NodeJS.ReadableStream with matches from tagpro.eu. By default, the matches are converted to separate JSONlines rows and the stream is compressed with gzip.
 
 ### Read JSONlines from a file
 
@@ -85,3 +87,27 @@ readJsonlines<T = unknown>(filename: string): Promise<T[]>
 ```
 
 Reads in an uncompressed JSONLines file and returns an array of the parsed JSON objects.
+
+## Note about JSONlines
+
+tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert this object to separate JSON lines, where each object has an additional `matchId` key.
+
+For example, this JSON export from tagpro.eu:
+
+```json
+{
+	"10001": {
+		/* match data */
+	},
+	"10002": {
+		/* match data */
+	}
+}
+```
+
+would be converted to JSONlines like this:
+
+```json
+{ "matchId": 10001, /* match data */ }
+{ "matchId": 10002, /* match data */ }
+```
