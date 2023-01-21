@@ -7,4 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+-   initial release.
+
 [Unreleased]: https://github.com/keratagpro/tagpro-analytics-bulk-download/compare/v0.0.1...HEAD

@@ -1,9 +1,7 @@
-import axios from 'axios';
 import { createWriteStream } from 'node:fs';
-import { finished } from 'node:stream';
-import { promisify } from 'node:util';
+import { finished } from 'node:stream/promises';
 
-const finishedAsync = promisify(finished);
+import axios from 'axios';
 
 import { TAGPRO_EU_DATA_URL } from './constants.js';
 
@@ -23,5 +21,5 @@ export async function downloadMaps(filename: string): Promise<void> {
 
 	(await requestMapsStreamAsync()).pipe(outstream);
 
-	return finishedAsync(outstream);
+	return finished(outstream);
 }
