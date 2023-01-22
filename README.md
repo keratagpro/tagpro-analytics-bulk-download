@@ -1,8 +1,8 @@
-# Tagpro Analytics bulk downloader
+# TagPro Analytics bulk downloader
 
 JS library and CLI tool to download maps and matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Matches are converted to [JSONlines](https://jsonlines.org/) and compressed with gzip by default.
 
-> **NOTE**
+> **Note**
 > tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert the object to separate JSON lines, where each object has an additional `matchId` key.
 >
 > For example, this JSON export of matches from tagpro.eu:
