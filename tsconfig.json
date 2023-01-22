@@ -6,7 +6,8 @@
 		"sourceMap": true,
 		"rootDir": "src",
 		"declaration": true,
-		"strict": true
+		"strict": true,
+		"esModuleInterop": true
 	},
 	"include": ["src"]
 }

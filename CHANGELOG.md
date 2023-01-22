@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+-   Added `tpa-download` CLI tool to download maps and matches from the command line.
+
 ## [0.2.0] - 2023-01-21
 
 ### Changed

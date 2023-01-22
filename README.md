@@ -1,6 +1,22 @@
 # Tagpro Analytics bulk downloader
 
-Downloads matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Converts the results to [JSONlines](https://jsonlines.org/) and compresses them with gzip by default.
+JS library and CLI tool to download maps and matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Matches are converted to [JSONlines](https://jsonlines.org/) and compressed with gzip by default.
+
+> **NOTE**
+> tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert the object to separate JSON lines, where each object has an additional `matchId` key.
+>
+> For example, this JSON export of matches from tagpro.eu:
+>
+> ```
+> {"10001":{/../},"10002":{/../}}
+> ```
+>
+> would be converted to JSONlines like this:
+>
+> ```
+> {/../,"matchId": 10001}
+> {/../,"matchId": 10002}
+> ```
 
 ## Install
 
@@ -8,7 +24,41 @@ Downloads matches in bulk from [tagpro.eu](https://tagpro.eu/?science). Converts
 npm install @keratagpro/tagpro-analytics-bulk-downloader
 ```
 
-## Usage
+## CLI
+
+Use the included `tpa-download` script to download maps & matches from the command line.
+
+### Download all maps
+
+```bash
+tpa-download maps <filename>
+```
+
+Example:
+
+```bash
+tpa-download maps bulkmaps.json
+```
+
+### Download matches
+
+```bash
+tpa-download matches --from-id <fromId> --to-id <toId> [--no-compress] [--no-jsonlines] <filename>
+```
+
+Example:
+
+```bash
+tpa-download matches --from-id 1000 --to-id 2000 matches-1000-2000.jsonl.gz
+```
+
+### Get last match ID
+
+```bash
+tpa-download last-match-id
+```
+
+## API
 
 ### Download maps
 
@@ -87,20 +137,3 @@ readJsonlines<T = unknown>(filename: string): Promise<T[]>
 ```
 
 Reads in an uncompressed JSONLines file and returns an array of the parsed JSON objects.
-
-## Note about JSONlines
-
-tagpro.eu exports matches as an object keyed by Match ID-s. The default behavior in this library is to convert the object to separate JSON lines, where each object has an additional `matchId` key.
-
-For example, this JSON export of matches from tagpro.eu:
-
-```json
-{"10001":{/../},"10002":{/../}}
-```
-
-would be converted to JSONlines like this:
-
-```json
-{/../,"matchId": 10001}
-{/../,"matchId": 10002}
-```
