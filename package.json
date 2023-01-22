@@ -1,6 +1,6 @@
 {
   "name": "@keratagpro/tagpro-analytics-bulk-downloader",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Downloads matches in bulk from tagpro.eu. Converts the results to jsonlines and compresses them with gzip by default.",
   "author": "Kera",
   "main": "dist/index.js",
