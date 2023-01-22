@@ -31,13 +31,13 @@ Use the included `tpa-download` script to download maps & matches from the comma
 ### Download all maps
 
 ```bash
-tpa-download maps <filename>
+tpa-download maps [--no-compress] [--no-jsonlines] <filename>
 ```
 
 Example:
 
 ```bash
-tpa-download maps bulkmaps.json
+tpa-download maps bulkmaps.jsonl.gz
 ```
 
 ### Download matches
@@ -63,10 +63,10 @@ tpa-download last-match-id
 ### Download maps
 
 ```ts
-downloadMaps(filename: string): Promise<void>
+downloadMaps(filename: string, { jsonlines = true, compress = true } = {}): Promise<void>
 ```
 
-Download all maps as JSON from tagpro.eu.
+Download all maps from tagpro.eu.
 
 Example:
 
@@ -122,18 +122,14 @@ import { getLastMatchId } from '@keratagpro/tagpro-analytics-bulk-downloader';
 const lastMatchId = await getLastMatchId();
 ```
 
-### (Advanced usage) Create a NodeJS.WritableStream of matches from tagpro.eu
+### Streams API
+
+```ts
+createMapsStream({ jsonlines = true, compress = true }): Promise<NodeJS.ReadableStream>;
+```
+
+Returns a NodeJS.ReadableStream with maps from tagpro.eu.
 
 ```ts
 createMatchRangeStream(fromId: number, toId: number, { jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
 ```
-
-Returns a NodeJS.ReadableStream with matches from tagpro.eu. By default, the matches are converted to separate JSONlines rows and the stream is compressed with gzip.
-
-### Read JSONlines from a file
-
-```ts
-readJsonlines<T = unknown>(filename: string): Promise<T[]>
-```
-
-Reads in an uncompressed JSONLines file and returns an array of the parsed JSON objects.

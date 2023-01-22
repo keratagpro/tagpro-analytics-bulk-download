@@ -2,17 +2,13 @@ import { createWriteStream } from 'node:fs';
 import { finished } from 'node:stream/promises';
 import { createGzip } from 'node:zlib';
 
-import axios from 'axios';
-import { load } from 'cheerio';
-import * as es from 'event-stream';
-import { stringify as stringifyJsonlines } from 'jsonlines';
-import { parse as parseJSON } from 'JSONStream';
+import { TAGPRO_EU_DATA_URL, TAGPRO_EU_SCIENCE_URL } from './constants';
+import { Match } from './types';
+import { fetchHtml, fetchStream } from './utils/fetch';
+import { jsonObjectToJsonlines } from './utils/stream';
 
-import { TAGPRO_EU_DATA_URL, TAGPRO_EU_SCIENCE_URL } from './constants.js';
-
-export async function getLastMatchId(): Promise<number | null> {
-	const { data } = await axios.get(TAGPRO_EU_SCIENCE_URL);
-	const $ = load(data);
+export async function getLastMatchId({ url = TAGPRO_EU_SCIENCE_URL } = {}): Promise<number | null> {
+	const $ = await fetchHtml(url);
 
 	const lastMatchInput = $('input[name="last"]');
 
@@ -25,40 +21,19 @@ export async function getLastMatchId(): Promise<number | null> {
 	return parseInt(value, 10);
 }
 
-export interface Match {
-	matchId: number;
-}
-
-function transformToJsonlines(stream: NodeJS.ReadableStream): NodeJS.ReadableStream {
-	return stream
-		.pipe(parseJSON('$*'))
-		.pipe(
-			es.mapSync(({ key, value }: { key: string; value: Match }) => ({
-				...value,
-				matchId: parseInt(key, 10),
-			}))
-		)
-		.pipe(stringifyJsonlines());
-}
-
 export async function createMatchRangeStream(
 	fromId: number,
 	toId: number,
-	{ jsonlines = true, compress = true } = {}
+	{ jsonlines = true, compress = true, url = TAGPRO_EU_DATA_URL } = {}
 ): Promise<NodeJS.ReadableStream> {
-	let stream = await axios
-		.get<NodeJS.ReadableStream>(TAGPRO_EU_DATA_URL, {
-			params: {
-				bulk: 'matches',
-				first: fromId,
-				last: toId,
-			},
-			responseType: 'stream',
-		})
-		.then((res) => res.data);
+	let stream = await fetchStream(url, {
+		bulk: 'matches',
+		first: fromId,
+		last: toId,
+	});
 
 	if (jsonlines) {
-		stream = transformToJsonlines(stream);
+		stream = stream.pipe(jsonObjectToJsonlines<Match>('matchId'));
 	}
 
 	if (compress) {

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+-   Exporting Map/Player/Team/Match types.
+-   Maps are now transformed to JSONlines + compressed with gzip by default.
+
 ## [0.3.0] - 2023-01-22
 
 ### Added
