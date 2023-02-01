@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+-   Some basic unit tests.
+-   `createReadStreamFromFile` to read jsonl.gz files.
+
 ## [0.4.0] - 2023-01-22
 
 ### Changed

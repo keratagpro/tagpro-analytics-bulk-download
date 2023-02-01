@@ -4,6 +4,12 @@ import { parse as parseJSON } from 'JSONStream';
 
 import { StreamCombiner } from './StreamCombiner';
 
+export function parseJsonObject() {
+	return parseJSON('$*');
+}
+
+export { parse as parseJsonlines } from 'jsonlines';
+
 export function injectKeyInsideObject<T>(fieldName: keyof T) {
 	return es.mapSync(({ key, value }: { key: string; value: T }) => ({
 		...value,

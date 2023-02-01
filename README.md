@@ -63,10 +63,11 @@ tpa-download last-match-id
 ### Download maps
 
 ```ts
+/**
+ * Download all maps from tagpro.eu.
+ */
 downloadMaps(filename: string, { jsonlines = true, compress = true } = {}): Promise<void>
 ```
-
-Download all maps from tagpro.eu.
 
 Example:
 
@@ -79,6 +80,9 @@ await downloadMaps('bulkmaps.json');
 ### Download matches
 
 ```ts
+/**
+ * Downloads a range of matches to a file. Default is to convert to [JSONLines](https://jsonlines.org/) and compress (using gzip).
+ */
 downloadMatchRange(
 	fromId: number, // inclusive
 	toId: number, // inclusive
@@ -86,8 +90,6 @@ downloadMatchRange(
 	{ jsonlines = true, compress = true } = {}
 ): Promise<void>
 ```
-
-Downloads a range of matches to a file. Default is to convert to [JSONLines](https://jsonlines.org/) and compress (using gzip).
 
 Example:
 
@@ -109,10 +111,11 @@ try {
 ### Get last match ID
 
 ```ts
+/**
+ * Returns the latest match ID from tagpro.eu.
+ */
 getLastMatchId(): Promise<number>
 ```
-
-Returns the latest match ID from tagpro.eu.
 
 Example:
 
@@ -125,11 +128,22 @@ const lastMatchId = await getLastMatchId();
 ### Streams API
 
 ```ts
-createMapsStream({ jsonlines = true, compress = true }): Promise<NodeJS.ReadableStream>;
+/**
+ * Returns a NodeJS.ReadableStream with maps from tagpro.eu.
+ */
+createMapsStream({ jsonlines = true, compress = true }): Promise<NodeJS.ReadableStream>
 ```
 
-Returns a NodeJS.ReadableStream with maps from tagpro.eu.
+```ts
+/**
+ * Returns a NodeJS.ReadableStream of matches from tagpro.eu.
+ */
+createMatchRangeStream(fromId: number, toId: number, { jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
+```
 
 ```ts
-createMatchRangeStream(fromId: number, toId: number, { jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
+/**
+ * Returns a NodeJS.ReadableStream of maps or matches from the given jsonl.gz file.
+ */
+createReadStreamFromFile(filename: string): NodeJS.ReadableStream
 ```
