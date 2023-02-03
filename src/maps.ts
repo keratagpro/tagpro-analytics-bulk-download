@@ -7,7 +7,7 @@ import { Map } from './types';
 import { fetchStream } from './utils/fetch';
 import { jsonObjectToJsonlines } from './utils/stream';
 
-export async function createMapsStream({
+export async function createMapsDownloadStream({
 	jsonlines = true,
 	compress = true,
 	url = TAGPRO_EU_DATA_URL,
@@ -30,7 +30,7 @@ export async function createMapsStream({
 export async function downloadMaps(filename: string, { jsonlines = true, compress = true } = {}): Promise<void> {
 	const outstream = createWriteStream(filename);
 
-	const stream = await createMapsStream({ jsonlines, compress });
+	const stream = await createMapsDownloadStream({ jsonlines, compress });
 	stream.pipe(outstream);
 
 	return finished(outstream);

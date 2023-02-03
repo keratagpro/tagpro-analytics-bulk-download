@@ -4,7 +4,7 @@ import { createGunzip } from 'node:zlib';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import { createMatchRangeStream } from '..';
+import { createMatchRangeDownloadStream } from '..';
 import { parseJsonlines } from '../utils/stream';
 
 function createReadable(data: any) {
@@ -28,7 +28,7 @@ describe('createMatchRangeStream', () => {
 	it('passes params to GET request', async () => {
 		mock.onGet().reply(200, createReadable('{}'));
 
-		await createMatchRangeStream(1, 2);
+		await createMatchRangeDownloadStream(1, 2);
 
 		expect(mock.history.get.length).toBe(1);
 
@@ -57,7 +57,7 @@ describe('createMatchRangeStream', () => {
 
 		mock.onGet().reply(200, createReadable(JSON.stringify(testMatches)));
 
-		const stream = await createMatchRangeStream(1, 2);
+		const stream = await createMatchRangeDownloadStream(1, 2);
 
 		const results: any[] = [];
 		for await (const match of stream.pipe(createGunzip()).pipe(parseJsonlines())) {

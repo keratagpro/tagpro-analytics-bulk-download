@@ -21,7 +21,7 @@ export async function getLastMatchId({ url = TAGPRO_EU_SCIENCE_URL } = {}): Prom
 	return parseInt(value, 10);
 }
 
-export async function createMatchRangeStream(
+export async function createMatchRangeDownloadStream(
 	fromId: number,
 	toId: number,
 	{ jsonlines = true, compress = true, url = TAGPRO_EU_DATA_URL } = {}
@@ -51,7 +51,7 @@ export async function downloadMatchRange(
 ): Promise<void> {
 	const outstream = createWriteStream(filename);
 
-	const stream = await createMatchRangeStream(fromId, toId, { jsonlines, compress });
+	const stream = await createMatchRangeDownloadStream(fromId, toId, { jsonlines, compress });
 	stream.pipe(outstream);
 
 	return await finished(outstream);

@@ -4,7 +4,7 @@ import { createGunzip } from 'node:zlib';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
-import { createMapsStream } from '..';
+import { createMapsDownloadStream } from '..';
 import { parseJsonlines } from '../utils/stream';
 
 function createReadable(data: any) {
@@ -28,7 +28,7 @@ describe('createMapsStream', () => {
 	it('passes params to GET request', async () => {
 		mock.onGet().reply(200, createReadable('{}'));
 
-		await createMapsStream();
+		await createMapsDownloadStream();
 
 		expect(mock.history.get.length).toBe(1);
 
@@ -59,7 +59,7 @@ describe('createMapsStream', () => {
 
 		mock.onGet().reply(200, createReadable(JSON.stringify(testMaps)));
 
-		const stream = await createMapsStream();
+		const stream = await createMapsDownloadStream();
 
 		const results: any[] = [];
 		for await (const map of stream.pipe(createGunzip()).pipe(parseJsonlines())) {

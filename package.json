@@ -5,6 +5,7 @@
   "author": "Kera",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "bin": {
     "tpa-download": "./dist/cli.js"
   },

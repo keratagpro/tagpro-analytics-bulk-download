@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+-   Renamed stream functions:
+    -   ~~`createMapsStream`~~ to `createMapsDownloadStream`
+    -   ~~`createMatchRangeStream`~~ to `createMatchRangeDownloadStream`
+
 ## [0.5.0] - 2023-02-01
 
 ### Added
