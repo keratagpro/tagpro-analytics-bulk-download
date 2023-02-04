@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.0] - 2023-02-04
+
 ### Added
 
 -   Added optional `objectMode` param to `createMapsDownloadStream` and `createMatchRangeDownloadStream`.
@@ -61,7 +63,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 -   initial release.
 
-[Unreleased]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/keratagpro/tagpro-analytics-bulk-downloader/compare/v0.3.0...v0.4.0
