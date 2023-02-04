@@ -131,14 +131,14 @@ const lastMatchId = await getLastMatchId();
 /**
  * Returns a NodeJS.ReadableStream with maps from tagpro.eu.
  */
-createMapsDownloadStream({ jsonlines = true, compress = true }): Promise<NodeJS.ReadableStream>
+createMapsDownloadStream({ objectMode = false, jsonlines = true, compress = true }): Promise<NodeJS.ReadableStream>
 ```
 
 ```ts
 /**
  * Returns a NodeJS.ReadableStream of matches from tagpro.eu.
  */
-createMatchRangeDownloadStream(fromId: number, toId: number, { jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
+createMatchRangeDownloadStream(fromId: number, toId: number, { objectMode = false, jsonlines = true, compress = true } = {}): Promise<NodeJS.ReadableStream>
 ```
 
 ```ts

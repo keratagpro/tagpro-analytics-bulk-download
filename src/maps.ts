@@ -5,9 +5,10 @@ import { createGzip } from 'node:zlib';
 import { TAGPRO_EU_DATA_URL } from './constants';
 import { Map } from './types';
 import { fetchStream } from './utils/fetch';
-import { jsonObjectToJsonlines } from './utils/stream';
+import { injectKeyInsideObject, splitJsonByKeys, stringifyJsonlines } from './utils/stream';
 
 export async function createMapsDownloadStream({
+	objectMode = false,
 	jsonlines = true,
 	compress = true,
 	url = TAGPRO_EU_DATA_URL,
@@ -16,8 +17,12 @@ export async function createMapsDownloadStream({
 		bulk: 'maps',
 	});
 
+	if (objectMode) {
+		return stream.pipe(splitJsonByKeys()).pipe(injectKeyInsideObject<Map>('mapId'));
+	}
+
 	if (jsonlines) {
-		stream = stream.pipe(jsonObjectToJsonlines<Map>('mapId'));
+		stream = stream.pipe(splitJsonByKeys()).pipe(injectKeyInsideObject<Map>('mapId')).pipe(stringifyJsonlines());
 	}
 
 	if (compress) {
